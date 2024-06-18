@@ -9,6 +9,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface CreditMapper {
@@ -16,6 +17,8 @@ public interface CreditMapper {
     @Mapping(target = "isClosed", constant = "false")
     @Mapping(target = "creditStart", expression = "java(java.time.LocalDate.now())")
      Credit CreditCreationDtoToEntity(CreditCreateDto dto);
+
+    List<CreditGetDto> listEntityToListCreditGetDto(List<Credit> credits);
 
     CreditGetDto EntityToCreditGetDto(Credit credit);
 
@@ -45,4 +48,5 @@ public interface CreditMapper {
         }
         return null;
     }
+
 }

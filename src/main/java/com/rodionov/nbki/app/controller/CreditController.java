@@ -9,6 +9,8 @@ import com.rodionov.nbki.platform.mapper.CreditMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/credit")
 public class CreditController {
@@ -28,10 +30,11 @@ public class CreditController {
         return creditService.createCredit(credit);
     }
 
-    @PutMapping("/update/{id}")
+    @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
-    public void updateCredit(@PathVariable String id, @RequestBody CreditUpdateDto credit) {
-        creditService.updateCredit(credit, id);
+    public List<CreditGetDto> getAllCredits() {
+        List<Credit> credits = creditService.getAllCredits();
+        return creditMapper.listEntityToListCreditGetDto(credits);
     }
 
     @GetMapping("/{id}")
@@ -39,6 +42,12 @@ public class CreditController {
     public CreditGetDto getCredit(@PathVariable String id) {
         Credit credit = creditService.getCredit(id);
         return creditMapper.EntityToCreditGetDto(credit);
+    }
+
+    @PutMapping("/update/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateCredit(@PathVariable String id, @RequestBody CreditUpdateDto credit) {
+        creditService.updateCredit(credit, id);
     }
 
     @DeleteMapping("/delete/{id}")
