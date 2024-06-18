@@ -1,4 +1,8 @@
 package com.rodionov.nbki.app.dto;
 
-public class CreditGetDto {
-}
+import lombok.Builder;
+
+import java.time.LocalDate;
+
+@Builder
+public record CreditGetDto (String id, Double creditAmount, Boolean isClosed, LocalDate creditStart, LocalDate creditEnd){ }

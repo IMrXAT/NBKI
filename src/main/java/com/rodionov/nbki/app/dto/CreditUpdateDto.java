@@ -1,4 +1,9 @@
 package com.rodionov.nbki.app.dto;
 
-public record CreditUpdateDto() {
+import lombok.Builder;
+
+import java.time.LocalDate;
+
+@Builder
+public record CreditUpdateDto(Double creditAmount, Boolean isClosed, LocalDate creditStart) {
 }
